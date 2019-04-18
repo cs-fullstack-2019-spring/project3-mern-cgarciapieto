@@ -1,0 +1,49 @@
+Home PAGE
+------------
+
+LINKS to Sign Up Page and LogIn page
+
+searchBar
+
+----------------------------------
+SIGN UP FORM page/Model
+
+username: String,
+password: String,
+imageUrl: String,
+BackgroundImageUrl: String,
+
+-----------------------------------
+Home Page/Logged IN
+
+when signed in  display '5' tweets
+Add tweet
+Edit tweet on the each indivdual tweet
+Search Bar for searching tweets
+some LINK for seeing all private tweets
+
+--------------------------------------
+Tweet Form/Model
+
+message: String, TextField for paragraphs (REQUIRED)
+tweetImageUrl: String,
+privateCheckBox: Booleon,
+
+-------------------------------------------------------
+
+creat DIR server
+install All apps for project
+mongoose, express, nodemon, User Auth apps,
+create DIR models in server DIR >> for SCHEMA's 
+-------------------------------------------------
+create react app client
+npm install 
+install react DOM
+change proxy
+-----------------------------------------------
+add personal mogo connection to app.js
+create CRUD routes and test in POSTMAN
+
+------------------------------------------------
+create 
+
