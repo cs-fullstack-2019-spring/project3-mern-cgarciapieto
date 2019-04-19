@@ -6,13 +6,13 @@ var UserSchema = new Schema(
     {
         username:{type: String, required: true, max: 100},
         password:{type: String, required: true, max: 100},
-        imageURL:{type: String, required},
-        backgroundImageUrl:{type: String},
+        imageURL:{type: String},
+        backgroundImageURL:{type: String},
 
         tweets: [{
-            messageField:{type: String, required},
+            messageField:{type: String, required:true, max: 100},
             tweetImageUrl:{type: String },
-            privateCheckBox:{type: Boolean, required},}]
+            privateCheckBox:{type: Boolean, required:true},}]
     },
 
 );
