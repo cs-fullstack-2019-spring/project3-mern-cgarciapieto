@@ -6,7 +6,7 @@ class Loggedout extends Component{
     render(){
         return(
             <div>
-                <h1>User is now logged out.</h1>
+                <h1>You Have Signed Out!</h1>
             </div>
         );
     }

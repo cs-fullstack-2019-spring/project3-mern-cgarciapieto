@@ -31,3 +31,11 @@
     transform: rotate(360deg);
   }
 }
+
+.links{
+  margin-left: 2%;
+}
+
+body{
+  background-color: #1da1f2;
+}

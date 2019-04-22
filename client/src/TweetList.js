@@ -71,10 +71,12 @@ class TweetList extends Component {
 
 
         if (tempArray.length > 0) {
+            console.log("Array");
+            console.log(this.tweets);
             mapArray = this.state.tweets.map(
-                (eachElement, id) => {
-                    return (<div key={id}>
-                        <p>{eachElement}</p>
+                (_id) => {
+                    return (<div>
+                        <h1>Something</h1>
                     </div>)
                 }
             );
@@ -93,7 +95,7 @@ class TweetList extends Component {
                 {this.props.logInfo.loggedIn ?
 
                     (<div>
-                        <h1>{this.props.logInfo.username}'s data</h1>
+                        <h1>{this.props.logInfo.username}'s Tweets</h1>
                         {this.state.mappedTweets}
                     </div>) :
 

@@ -5,6 +5,7 @@ var bCrypt = require('bcrypt-nodejs');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var userCollection = require('../models/UserSchema');
+var ObjectID = require('mongodb').ObjectID;
 
 router.use(passport.initialize());
 router.use(passport.session());
@@ -117,8 +118,8 @@ passport.use('signup', new LocalStrategy(
             var newUser = new userCollection();
             newUser.username = username;
             newUser.password = createHash(password);
-            // newUser.imageURL = req.param('imageURL');
-            // newUser.backgroundImageURL = req.param('backgroundImageURL');
+            newUser.imageURL = req.param('imageURL');
+            newUser.backgroundImageURL = req.param('backgroundImageURL');
 
 
 
@@ -165,34 +166,33 @@ router.get('/failNewUser', (req, res)=>{
 router.get('/getTweet', (req, res)=>{
   userCollection.findOne({username: req.session.username}, (errors, results)=>{
     if(results){ return res.send(results); }
-    else{return res.send({message: "Didn't find a user!!!"})}
+    else{return res.send({message: "no tweets"})}
   })
 });
 
 router.post('/addTweet', (req,res)=>{
   userCollection.findOneAndUpdate({username: req.body.username},
-      {$push: {tweets: req.body.tweetItems}}, (errors, results)=>{
+      {$push: {tweets: {_id: new ObjectID(), tweets: req.body.tweetItems}}}, (errors, results)=>{
         if(errors) res.send(errors);
-        else res.send("ADDED!!!");
+        else res.send("Tweet Added!");
       });
 });
 
-// ******************************************
-// ******   How to protect routes   *********
-// ******************************************
+router.get('/getAllUsers', (req, res)=>{
+    userCollection.find({username: req.session.username}, (errors, results)=>{
+        if(results){ return res.send(results); }
+        else{return res.send({message: "no users found"})}
+    })
+});
 
-/* GET Home Page */
-// router.get('/home', isAuthenticated, function(req, res){
-//     res.render('home', { user: req.user });
-// });
-//
-// // As with any middleware it is quintessential to call next()
-// // if the user is authenticated
-// var isAuthenticated = function (req, res, next) {
-//     if (req.isAuthenticated())
-//         return next();
-//     res.redirect('/');
-// }
+
+router.get('/getAllTweet', (req, res)=>{
+    userCollection.find({username: req.session.username}, (errors, results)=>{
+        if(results){ return res.send(results); }
+        else{return res.send({message: "no tweets"})}
+    })
+});
+
 
 
 module.exports = router;

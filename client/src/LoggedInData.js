@@ -22,6 +22,7 @@ class LoggedInData extends Component{
             body: JSON.stringify({
                 username: this.props.logInfo.username,
                 tweetItems: e.target.tweetItems.value,
+                tweetImageUrl: e.target.tweetImageUrl.value,
             }),
         })
             .then(data=>data.text())
@@ -31,17 +32,19 @@ class LoggedInData extends Component{
     render(){
         if(!this.props.logInfo.loggedIn){
             return(<div>
-                <h1>NOT LOGGED IN!!!</h1>
+                <h1>Must Be logged In</h1>
             </div>);
         }
         else {
             return (
                 <div>
-                    <h1>Welcome {this.props.logInfo.username}</h1>
+                    <h1>Tweet Something {this.props.logInfo.username}</h1>
                     <form onSubmit={this.TweetItemsSubmit}>
                         <p>
                             <label htmlFor={"tweetItems"}>tweet here:</label>
                             <input type="text" id={"tweetItems"} name={"tweetItems"}/>
+                            <label htmlFor={"tweetItems"}>add image here:</label>
+                            <input type="text" id={"tweetImageUrl"} name={"tweetImageUrl"}/>
                         </p>
                         <button>Submit</button>
                     </form>

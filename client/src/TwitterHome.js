@@ -78,13 +78,11 @@ class TwitterHome extends Component{
                 <Router>
                     <h1>twitter home</h1>
 
-                    <Link className="linkSpacing" to='/'>Home</Link>
-                    {/*<Link className="linkSpacing" to='/login'>Sign In</Link>*/}
-                    <Link className="linkSpacing" to='/adduser'>Add User</Link>
-                    <Link className="linkSpacing" to='/loggedIn'>Logged In User's Info</Link>
-                    <Link className="linkSpacing" to='/loggedout' onClick={this.logUserOut}>Log Out</Link>
+                    <Link className="links" to='/'>Home</Link>
+                    <Link className="links" to='/adduser'>Create User</Link>
+                    <Link className="links" to='/loggedIn'>Add Tweets</Link>
+                    <Link className="links" to='/loggedout' onClick={this.logUserOut}>Log Out</Link>
                     <Route exact path='/' component={()=>{return <TweetList logInfo={this.state.logInfo} loggedInUserInfo={this.loggedInUserInfo} />} }/>
-                    {/*<Route exact path='/login' component={()=>{return <Login logInfo={this.state.logInfo} loggedInUserInfo={this.loggedInUserInfo}/>} }/>*/}
                     <Route exact path='/adduser' component={AddUser}/>
                     <Route exact path='/loggedIn' component={()=>{return <LoggedInData logInfo={this.state.logInfo} loggedInUserInfo={this.loggedInUserInfo}/>} }/>
                     <Route exact path='/loggedout' component={()=>{return <Loggedout/>} }/>
