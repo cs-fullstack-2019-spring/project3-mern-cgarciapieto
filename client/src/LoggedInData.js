@@ -5,7 +5,8 @@ class LoggedInData extends Component{
         super(props);
         this.state={
             loggedIn: false,
-            message: "",
+            message: '',
+            tweets:[]
         };
         console.log(this.props.logInfo);
     }
@@ -21,8 +22,11 @@ class LoggedInData extends Component{
             },
             body: JSON.stringify({
                 username: this.props.logInfo.username,
+                // tweetImageUrl: e.target.tweetImageUrl.value,
                 tweetItems: e.target.tweetItems.value,
-                tweetImageUrl: e.target.tweetImageUrl.value,
+                messageField: this.state.message
+
+
             }),
         })
             .then(data=>data.text())
@@ -42,8 +46,8 @@ class LoggedInData extends Component{
                     <form onSubmit={this.TweetItemsSubmit}>
                         <p>
                             <label htmlFor={"tweetItems"}>tweet here:</label>
-                            <input type="text" id={"tweetItems"} name={"tweetItems"}/>
-                            <label htmlFor={"tweetItems"}>add image here:</label>
+                            <textarea type="text" id={"tweetItems"} name={"tweetItems"}/>
+                            <label htmlFor={"hhhhs"}>add image here:</label>
                             <input type="text" id={"tweetImageUrl"} name={"tweetImageUrl"}/>
                         </p>
                         <button>Submit</button>

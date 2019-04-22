@@ -186,7 +186,7 @@ router.get('/getAllUsers', (req, res)=>{
 });
 
 
-router.get('/getAllTweet', (req, res)=>{
+router.get('/getAllTweets', (req, res)=>{
     userCollection.find({username: req.session.username}, (errors, results)=>{
         if(results){ return res.send(results); }
         else{return res.send({message: "no tweets"})}

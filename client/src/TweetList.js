@@ -54,7 +54,7 @@ class TweetList extends Component {
             .then(data => data.json())
 
             .then(response => {
-                return this.setState({tweets: response.tweet}, () => this.mappedTweetFunction())
+                return this.setState({tweets: response.tweets}, () => this.mappedTweetFunction())
             });
     }
 
@@ -68,15 +68,17 @@ class TweetList extends Component {
         if (this.state.tweets)
 
             tempArray = this.state.tweets;
-
+        console.log('this.tweets', this.tweets);
 
         if (tempArray.length > 0) {
-            console.log("Array");
-            console.log(this.tweets);
+            console.log('this.tweets', this.tweets);
             mapArray = this.state.tweets.map(
-                (_id) => {
+                (value, key) => {
+                    console.log('key', key);
+                    console.log('value', value);
                     return (<div>
-                        <h1>Something</h1>
+                        <h1>{ value._id }</h1>
+                        <h1>{ value.messageField }</h1>
                     </div>)
                 }
             );
