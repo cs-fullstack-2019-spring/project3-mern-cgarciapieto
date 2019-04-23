@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 
+
+
+
 class LoggedInData extends Component{
     constructor(props) {
         super(props);
         this.state={
             loggedIn: false,
             message: '',
-            tweets:[]
+
         };
         console.log(this.props.logInfo);
     }
+
+
+
 
     TweetItemsSubmit=(e)=>{
         e.preventDefault();
@@ -22,9 +28,8 @@ class LoggedInData extends Component{
             },
             body: JSON.stringify({
                 username: this.props.logInfo.username,
-                // tweetImageUrl: e.target.tweetImageUrl.value,
-                tweetItems: e.target.tweetItems.value,
-                messageField: this.state.message
+                tweetItems: e.target.tweets.value,
+
 
 
             }),
@@ -32,6 +37,12 @@ class LoggedInData extends Component{
             .then(data=>data.text())
             .then(response=>this.setState({message: response}));
     };
+
+
+
+
+
+
 
     render(){
         if(!this.props.logInfo.loggedIn){

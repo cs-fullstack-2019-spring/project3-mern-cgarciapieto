@@ -9,7 +9,6 @@ class TweetList extends Component {
         };
     }
 
-
     componentDidMount() {
         this.fetchUserTweetData();
     }
@@ -52,7 +51,6 @@ class TweetList extends Component {
         fetch('/users/getTweet')
 
             .then(data => data.json())
-
             .then(response => {
                 return this.setState({tweets: response.tweets}, () => this.mappedTweetFunction())
             });

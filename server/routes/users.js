@@ -171,11 +171,20 @@ router.get('/getTweet', (req, res)=>{
 });
 
 router.post('/addTweet', (req,res)=>{
-  userCollection.findOneAndUpdate({username: req.body.username},
-      {$push: {tweets: {_id: new ObjectID(), tweets: req.body.tweetItems}}}, (errors, results)=>{
-        if(errors) res.send(errors);
-        else res.send("Tweet Added!");
-      });
+    userCollection.findOneAndUpdate({username: req.body.username},
+
+        {$push:
+                {
+                    _id: new ObjectID(),
+                    tweets: req.body.tweetItems
+                }
+        },
+        (errors, results)=>{
+        console.log("what client sends to the server");
+        console.log(req.body);
+            if(errors) res.send(errors);
+            else res.send("Tweet Added!");
+        });
 });
 
 router.get('/getAllUsers', (req, res)=>{
