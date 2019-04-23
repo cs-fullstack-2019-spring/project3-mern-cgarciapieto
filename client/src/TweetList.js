@@ -75,8 +75,10 @@ class TweetList extends Component {
                     console.log('key', key);
                     console.log('value', value);
                     return (<div>
-                        <h1>{ value._id }</h1>
+
                         <h1>{ value.messageField }</h1>
+                        {/*the tweetImageurl has to pulled in side the img tag with the value set to attribute being called*/}
+                        <img  src= {value.tweetImageUrl} alt=''/>
                     </div>)
                 }
             );

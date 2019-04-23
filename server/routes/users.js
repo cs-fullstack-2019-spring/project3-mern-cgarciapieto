@@ -170,12 +170,17 @@ router.get('/getTweet', (req, res)=>{
   })
 });
 
+/*find one and update and finding the usercollection model, grabs the username and then updates/saves the added tweet to tweetItems*/
+
+
+
+
 router.post('/addTweet', (req,res)=>{
     userCollection.findOneAndUpdate({username: req.body.username},
 
         {$push:
                 {
-                    _id: new ObjectID(),
+                    // _id: new ObjectID(),
                     tweets: req.body.tweetItems
                 }
         },

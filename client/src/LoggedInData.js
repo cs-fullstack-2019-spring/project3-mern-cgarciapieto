@@ -26,13 +26,18 @@ class LoggedInData extends Component{
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                username: this.props.logInfo.username,
-                tweetItems: e.target.tweets.value,
 
-
-
-            }),
+            /*it is requred that to submit to database the model has to be attributes  shown in the schema */
+            body: JSON.stringify(
+                {
+                        username: this.props.logInfo.username,
+                        tweetItems: {
+                            messageField: e.target.messageField.value,
+                            tweetImageUrl: e.target.tweetImageUrl.value,
+                            privateCheckBox: true
+                        }
+                    }
+                ),
         })
             .then(data=>data.text())
             .then(response=>this.setState({message: response}));
@@ -56,9 +61,9 @@ class LoggedInData extends Component{
                     <h1>Tweet Something {this.props.logInfo.username}</h1>
                     <form onSubmit={this.TweetItemsSubmit}>
                         <p>
-                            <label htmlFor={"tweetItems"}>tweet here:</label>
-                            <textarea type="text" id={"tweetItems"} name={"tweetItems"}/>
-                            <label htmlFor={"hhhhs"}>add image here:</label>
+                            <label htmlFor={"messageField"}>tweet here:</label>
+                            <textarea type="text" id={"messageField"} name={"messageField"}/>
+                            <label htmlFor={"tweetImageUrl"}>add image here:</label>
                             <input type="text" id={"tweetImageUrl"} name={"tweetImageUrl"}/>
                         </p>
                         <button>Submit</button>
