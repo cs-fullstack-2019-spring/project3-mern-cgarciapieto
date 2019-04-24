@@ -208,5 +208,12 @@ router.get('/getAllTweets', (req, res)=>{
 });
 
 
+router.get('/edit', (req, res)=>{
+    userCollection.findOneAndUpdate({username: req.session.username}, (errors, results)=>{
+        if(results){ return res.send(results); }
+        else{return res.send({message: "no tweet to edit"})}
+    })
+});
+
 
 module.exports = router;
