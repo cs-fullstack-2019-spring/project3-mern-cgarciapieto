@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class TweetList extends Component {
     constructor(props) {
         super(props);
@@ -72,10 +72,11 @@ class TweetList extends Component {
             console.log('this.tweets', this.tweets);
             mapArray = this.state.tweets.map(
                 (value, key) => {
-                    console.log('key', key);
-                    console.log('value', value);
+                    console.log('*********************key', key);
+                    console.log('*************************value', value);
                     return (<div>
 
+                        <Link to='/users/getTweet' onClick={this.props._id}>Edit</Link>
                         <h1>{ value.messageField }</h1>
                         {/*the tweetImageurl has to pulled in side the img tag with the value set to attribute being called*/}
                         <img  src= {value.tweetImageUrl} alt=''/>

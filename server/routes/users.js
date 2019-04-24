@@ -164,6 +164,7 @@ router.get('/failNewUser', (req, res)=>{
 });
 
 router.get('/getTweet', (req, res)=>{
+    console.log({username: req.session.username});
   userCollection.findOne({username: req.session.username}, (errors, results)=>{
     if(results){ return res.send(results); }
     else{return res.send({message: "no tweets"})}
@@ -208,12 +209,20 @@ router.get('/getAllTweets', (req, res)=>{
 });
 
 
-router.get('/edit', (req, res)=>{
-    userCollection.findOneAndUpdate({username: req.session.username}, (errors, results)=>{
-        if(results){ return res.send(results); }
-        else{return res.send({message: "no tweet to edit"})}
-    })
+router.post('/updateTweet', (req,res)=>{
+    userCollection.findOneAndUpdate(
+        {_id: req.body.tweetId},
+        {
+            $set: {
+                'messageField.$': req.body.messageField,
+                'tweetImageUrl.$': req.body.tweetImageUrl,
+                'privateCheckBox.$': req.body.privateCheckBox,
+            }
+        },
+        (errors, results)=>{
+            if(errors) res.send(errors);
+            else res.send("Tweet Updated!");
+        });
 });
-
 
 module.exports = router;

@@ -4,6 +4,7 @@ import TweetList from "./TweetList";
 import AddUser from "./AddUser";
 import Loggedout from "./Loggedout";
 import LoggedInData from "./LoggedInData";
+import UpdateData from "./Update";
 
 class TwitterHome extends Component{
 
@@ -86,6 +87,7 @@ class TwitterHome extends Component{
                     <Route exact path='/adduser' component={AddUser}/>
                     <Route exact path='/loggedIn' component={()=>{return <LoggedInData logInfo={this.state.logInfo} loggedInUserInfo={this.loggedInUserInfo}/>} }/>
                     <Route exact path='/loggedout' component={()=>{return <Loggedout/>} }/>
+                    <Route exact path='/edit' component={()=>{return <edit/>} }/>
                 </Router>
             </div>
         );
