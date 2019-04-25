@@ -27,6 +27,7 @@ class TweetList extends Component {
                 body: JSON.stringify({
                     username: e.target.username.value,
                     password: e.target.password.value,
+
                 }),
             })
 
@@ -72,14 +73,20 @@ class TweetList extends Component {
             console.log('this.tweets', this.tweets);
             mapArray = this.state.tweets.map(
                 (value, key) => {
-                    console.log('*********************key', key);
-                    console.log('*************************value', value);
-                    return (<div>
+                    return (<div className={"item-2"}>
 
-                        <Link to='/users/getTweet' onClick={this.props._id}>Edit</Link>
-                        <h1>{ value.messageField }</h1>
+                        <div className={'List'}>
+                            <ul>
+
+                                <img  src= {value.imageURL} alt=''/>
+
+                        {/*<li><Link to='/users/edit' onClick={this.props._id}>Edit</Link></li>*/}
+                        <p>{ value.messageField }</p>
                         {/*the tweetImageurl has to pulled in side the img tag with the value set to attribute being called*/}
                         <img  src= {value.tweetImageUrl} alt=''/>
+                            </ul>
+
+                            </div>
                     </div>)
                 }
             );
@@ -98,7 +105,6 @@ class TweetList extends Component {
                 {this.props.logInfo.loggedIn ?
 
                     (<div>
-                        <h1>{this.props.logInfo.username}'s Tweets</h1>
                         {this.state.mappedTweets}
                     </div>) :
 

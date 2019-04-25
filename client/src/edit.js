@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-
+console.log('0');
 
 class Edit extends Component{
     constructor(props) {
@@ -12,13 +12,15 @@ class Edit extends Component{
 
         };
         console.log(this.props.logInfo);
+        console.log('0');
     }
 
 
-    TweetItemsSubmit=(e)=>{
+    editTweet=(e)=>{
         e.preventDefault();
+    console.log("1");
+        fetch('/users/updateTweet',{
 
-        fetch('/users/addTweet',{
             method: 'POST',
             headers: {
                 "Accept": "application/json",
@@ -29,14 +31,15 @@ class Edit extends Component{
             body: JSON.stringify(
                 {
                     username: this.props.logInfo.username,
-                    tweetItems: {
+                    tweets: {
                         messageField: e.target.messageField.value,
                         tweetImageUrl: e.target.tweetImageUrl.value,
-                        privateCheckBox: true
+
                     }
                 }
             ),
-        })
+        });
+        console.log("3")
             .then(data=>data.text())
             .then(response=>this.setState({message: response}));
     };
@@ -53,18 +56,22 @@ class Edit extends Component{
                 <h1>Must Be logged In</h1>
             </div>);
         }
-        else {
+        else {console.log("4")
             return (
+
                 <div>
-                    <h1>Tweet Something {this.props.logInfo.username}</h1>
-                    <form onSubmit={this.TweetItemsSubmit}>
+
+
+
+                    <h1>Edit Tweet {this.props.logInfo.username}</h1>
+                    <form onSubmit={this.editTweet}>
                         <p>
                             <label htmlFor={"messageField"}>tweet here:</label>
                             <textarea type="text" id={"messageField"} name={"messageField"}/>
                             <label htmlFor={"tweetImageUrl"}>add image here:</label>
                             <input type="text" id={"tweetImageUrl"} name={"tweetImageUrl"}/>
                         </p>
-                        <button>Submit</button>
+                        <button>Submit Edit</button>
                     </form>
                     {this.state.message}
                 </div>

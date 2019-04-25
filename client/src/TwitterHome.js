@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import TweetList from "./TweetList";
 import AddUser from "./AddUser";
 import Loggedout from "./Loggedout";
 import LoggedInData from "./LoggedInData";
-import UpdateData from "./Update";
+import Edit from './edit'
 
-class TwitterHome extends Component{
+
+class TwitterHome extends Component {
 
     constructor(props) {
         super(props);
-        this.state={
-            logInfo:{
+        this.state = {
+            logInfo: {
                 username: null,
                 loggedIn: false,
             },
@@ -22,27 +23,26 @@ class TwitterHome extends Component{
         this.checkForUser();
     }
 
-    checkForUser(){
+    checkForUser() {
         console.log("Check for user");
         fetch('/users')
-            .then(data=>{
+            .then(data => {
                 return data.text();
             })
-            .then(response=>{
+            .then(response => {
 
-                if(response) {
+                if (response) {
                     this.setState(
                         {
-                            logInfo:{
+                            logInfo: {
                                 username: response,
                                 loggedIn: true,
                             }
                         });
-                }
-                else {
+                } else {
                     this.setState(
                         {
-                            logInfo:{
+                            logInfo: {
                                 username: null,
                                 loggedIn: false,
                             }
@@ -53,44 +53,68 @@ class TwitterHome extends Component{
     }
 
 
-    loggedInUserInfo =(username, loggedIn)=>{
+    loggedInUserInfo = (username, loggedIn) => {
         console.log("Clear");
         console.log(username + "-" + loggedIn);
         this.setState({
-            logInfo:{
+            logInfo: {
                 username: username,
                 loggedIn: loggedIn,
             }
         });
     };
 
-    logUserOut=()=>{
+    logUserOut = () => {
         console.log("Clicked Logout");
         fetch('/users/logout')
-            .then(data=>{return data.text()})
-            .then(data=>console.log(data))
-            .then(()=>this.loggedInUserInfo(undefined, false))
-            .catch(()=>console.log("Test"));
+            .then(data => {
+                return data.text()
+            })
+            .then(data => console.log(data))
+            .then(() => this.loggedInUserInfo(undefined, false))
+            .catch(() => console.log("Test"));
     };
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <Router>
-                    <h1>twitter home</h1>
+                    <h1 className={'item-1'}>Twitter</h1>
+                    <div className={'nav'}>
 
-                    <Link className="links" to='/'>Home</Link>
-                    <Link className="links" to='/adduser'>Create User</Link>
-                    <Link className="links" to='/loggedIn'>Add Tweets</Link>
-                    <Link className="links" to='/loggedout' onClick={this.logUserOut}>Log Out</Link>
-                    <Route exact path='/' component={()=>{return <TweetList logInfo={this.state.logInfo} loggedInUserInfo={this.loggedInUserInfo} />} }/>
-                    <Route exact path='/adduser' component={AddUser}/>
-                    <Route exact path='/loggedIn' component={()=>{return <LoggedInData logInfo={this.state.logInfo} loggedInUserInfo={this.loggedInUserInfo}/>} }/>
-                    <Route exact path='/loggedout' component={()=>{return <Loggedout/>} }/>
-                    <Route exact path='/edit' component={()=>{return <edit/>} }/>
+                        <ul>
+                            <button><Link className={'navItems'} to='/'>Home</Link></button>
+                            <button><Link className={'navItems'} to='/adduser'>Create User</Link></button>
+                            <button><Link className={'navItems'} to='/loggedIn'>Add Tweets</Link></button>
+                            <button><Link className={'navItems'} to='/loggedout' onClick={this.logUserOut}>Log
+                                Out</Link></button>
+
+
+                        </ul>
+
+                        <Route exact path='/' component={() => {
+                            return <TweetList logInfo={this.state.logInfo} loggedInUserInfo={this.loggedInUserInfo}/>
+                        }}/>
+                        <Route exact path='/adduser' component={AddUser}/>
+                        <Route exact path='/loggedIn' component={() => {
+                            return <LoggedInData logInfo={this.state.logInfo} loggedInUserInfo={this.loggedInUserInfo}/>
+                        }}/>
+                        <Route exact path='/loggedout' component={() => {
+                            return <Loggedout/>
+                        }}/>
+                        <Route exact path='/edit' component={() => {
+                            return <Edit/>
+                        }}/>
+                    </div>
                 </Router>
+
+                <section>
+
+
+                </section>
             </div>
         );
     }
 }
+
 export default TwitterHome;

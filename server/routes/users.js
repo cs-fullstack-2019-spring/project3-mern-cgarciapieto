@@ -1,12 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
+
+// hash passwords
 var bCrypt = require('bcrypt-nodejs');
+
+
+//middleware, run at the start
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+
+
 var userCollection = require('../models/UserSchema');
 var ObjectID = require('mongodb').ObjectID;
 
+//serialization  Deserialization:
 router.use(passport.initialize());
 router.use(passport.session());
 passport.serializeUser(function(user, done) {
@@ -20,6 +28,8 @@ passport.deserializeUser(function(id, done) {
 var isValidPassword = function(user, password){
   return bCrypt.compareSync(password, user.password);
 };
+
+//password randominzer
 var createHash = function(password){
   return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
 };
@@ -211,7 +221,7 @@ router.get('/getAllTweets', (req, res)=>{
 
 router.post('/updateTweet', (req,res)=>{
     userCollection.findOneAndUpdate(
-        {_id: req.body.tweetId},
+        {_id: req.body.tweets},
         {
             $set: {
                 'messageField.$': req.body.messageField,

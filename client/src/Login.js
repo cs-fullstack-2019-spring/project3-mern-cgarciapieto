@@ -39,13 +39,15 @@ class Login extends Component{
 
 
         return(
-            <div>
+            <div >
                 <h1>Log In</h1>
-                <form onSubmit={this.submitLoginForm}>
+                <div id={'login'}>
+                <form  onSubmit={this.submitLoginForm}>
                     <input type="text" name='username' placeholder="Enter username" autoFocus/>
                     <input type="password" name='password' placeholder="Enter password" />
                     <button>Sign In</button>
                 </form>
+                </div>
                 {this.state.data}
                 {/*{userMap}*/}
             </div>

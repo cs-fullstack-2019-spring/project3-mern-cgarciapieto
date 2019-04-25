@@ -31,6 +31,7 @@ class LoggedInData extends Component{
             body: JSON.stringify(
                 {
                         username: this.props.logInfo.username,
+                        imageURL: this.props.logInfo.imageURL,
                         tweetItems: {
                             messageField: e.target.messageField.value,
                             tweetImageUrl: e.target.tweetImageUrl.value,
@@ -59,7 +60,7 @@ class LoggedInData extends Component{
             return (
                 <div>
                     <h1>Tweet Something {this.props.logInfo.username}</h1>
-                    <form onSubmit={this.TweetItemsSubmit}>
+                    <form className={'form2'} onSubmit={this.TweetItemsSubmit}>
                         <p>
                             <label htmlFor={"messageField"}>tweet here:</label>
                             <textarea type="text" id={"messageField"} name={"messageField"}/>
