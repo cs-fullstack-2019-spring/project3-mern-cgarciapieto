@@ -105,6 +105,15 @@ router.get('/loginfail', (req, res)=>{
   res.send(undefined)
 });
 
+router.get('/getData', (req, res) => {
+    userCollection.find((err, data) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true, data: data });
+    });
+});
+
+
+
 
 passport.use('signup', new LocalStrategy(
     {passReqToCallback : true},
@@ -139,7 +148,7 @@ passport.use('signup', new LocalStrategy(
                 console.log('Error in Saving user: '+err);
                 throw err;
               }
-              console.log('User Registration succesful');
+              console.log('User Registration successfull');
               return done(null, newUser);
             });
           }
@@ -195,7 +204,7 @@ router.post('/addTweet', (req,res)=>{
                     tweets: req.body.tweetItems
                 }
         },
-        (errors, results)=>{
+        (errors)=>{
         console.log("what client sends to the server");
         console.log(req.body);
             if(errors) res.send(errors);

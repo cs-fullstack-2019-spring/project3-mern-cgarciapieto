@@ -5,7 +5,8 @@ import 'purecss/build/pure.css'
 
 import './App.css';
 import TwitterHome from "./TwitterHome";
-import Login from "./Login";
+
+
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
 
       <div className="App">
         <TwitterHome/>
+
       </div>
     );
   }

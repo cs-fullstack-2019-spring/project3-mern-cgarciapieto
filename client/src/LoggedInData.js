@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 
-
-
 class LoggedInData extends Component{
     constructor(props) {
         super(props);
@@ -27,7 +25,7 @@ class LoggedInData extends Component{
                 "Content-Type": "application/json"
             },
 
-            /*it is requred that to submit to database the model has to be attributes  shown in the schema */
+            /*it is required that to submit to database the model has to be attributes  shown in the schema */
             body: JSON.stringify(
                 {
                         username: this.props.logInfo.username,
