@@ -105,7 +105,7 @@ router.get('/loginfail', (req, res)=>{
   res.send(undefined)
 });
 
-router.get('/getData', (req, res) => {
+router.post('/getData', (req, res) => {
     userCollection.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true, data: data });
