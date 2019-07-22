@@ -39,41 +39,59 @@ class PublicTweets extends Component {
         })
             .then(data => data.json())
             .then(response => {
-                return this.setState({tweets: response.tweets})
+                return this.setState({tweets: response.tweets}, () => this.mappedTweetFunction())
             });
     };
 
-    publicTweets = (e)=>{
-        this.setState({tweets:e.target.value});
-        this.getDataFromDatabase();
-    };
 
-    render(){
-        const mappedTweets = this.state.tweets && this.state.tweets.map((eachItem,index)=>{
-            return(
-                <div key={index}>
-                    {eachItem.tweets.map((x, i) => (
-                        <div key={i}>
-                            <hr />
-                            <img src={x.tweetImageUrl}/>
-                            <p>{x.messageField}</p>
+    mappedTweetFunction() {
+
+        let mapArray = [];
+
+        console.log(this.state.tweets);
+        let tempArray = [];
+        if (this.state.tweets)
+
+            tempArray = this.state.tweets;
+        console.log('this.tweets', this.tweets);
+
+        if (tempArray.length > 0) {
+            console.log('this.tweets', this.tweets);
+            mapArray = this.state.tweets.map(
+                (value) => {
+                    return (
+                        <div>
+                            <ul>
+                                <img  src= {value.imageURL} alt=''/>
+                                <p>{ value.messageField }</p>
+                                <img  src= {value.tweetImageUrl} alt=''/>
+                            </ul>
                         </div>
-                    ))}
-                </div>
-            )
-        });
+                    )
+                }
+            );
+            console.log(mapArray);
+        } else {
+            console.log("no tweets available ");
+            mapArray = [];
+        }
+
+        this.setState({mappedTweets: mapArray});
+    }
+
+    render() {
         return (
             <div>
-                <p>
+                {
 
-                </p>
-                {mappedTweets}
+                    (<div>
+                        {this.state.mappedTweets}
+                    </div>)
+                }
+
             </div>
         );
-
     }
 }
-
-
 
 export default PublicTweets;

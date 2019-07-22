@@ -6,6 +6,7 @@ import 'purecss/build/pure.css'
 import './App.css';
 import TwitterHome from "./TwitterHome";
 import PublicTweets from "./PublicTweets";
+import AllTweets from "./AllTweets";
 
 
 
@@ -14,7 +15,7 @@ class App extends Component {
     return (
 
       <div className="App">
-        <PublicTweets/>
+        <AllTweets/>
 
 
       </div>
